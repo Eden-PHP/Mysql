@@ -1,5 +1,5 @@
 {
-    "name": "eden-php/sql",
+    "name": "eden-php/mysql",
     "type": "library",
     "description": "SQL core methods for MySQL, Posgres and SQLite",
     "keywords": ["eden", "library"],
