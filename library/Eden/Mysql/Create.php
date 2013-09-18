@@ -27,6 +27,11 @@ class Create extends SqlQuery
 	protected $uniqueKeys = array();
 	protected $primaryKeys = array();
 	
+	/**
+	 * Construct: Set the table, if any
+	 *
+	 * @param string|null
+	 */
 	public function __construct($name = null) 
 	{
 		if(is_string($name)) {

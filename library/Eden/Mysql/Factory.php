@@ -9,7 +9,7 @@
 
 namespace Eden\Mysql;
 
-use Eden\Sql\Database as SqlDatabase;
+use Eden\Sql\Factory as SqlFactory;
 
 /**
  * Abstractly defines a layout of available methods to
@@ -24,13 +24,22 @@ use Eden\Sql\Database as SqlDatabase;
  * @package Mysql
  * @author Christian Blanquera cblanquera@openovate.com
  */
-class Database extends SqlDatabase 
+class Factory extends SqlFactory 
 {
 	protected $host = 'localhost';
 	protected $name = null;
 	protected $user = null;
 	protected $pass = null;
 	
+	/**
+	 * Construct: Store connection information
+	 *
+	 * @param string|null
+	 * @param string
+	 * @param string
+	 * @param string|null
+	 * @param number|null
+	 */
 	public function __construct($host, $name, $user, $pass = null, $port = null) 
 	{
 		//argument test
@@ -83,7 +92,7 @@ class Database extends SqlDatabase
 	 * Connects to the database
 	 * 
 	 * @param array the connection options
-	 * @return Eden\Mysql\Database
+	 * @return Eden\Mysql\Factory
 	 */
 	public function connect(array $options = array()) 
 	{
@@ -98,9 +107,9 @@ class Database extends SqlDatabase
 		
 		$connection = 'mysql:'.$host.$port.'dbname='.$this->name;
 		
-		$this->connection = new PDO($connection, $this->user, $this->pass, $options);
+		$this->connection = new \PDO($connection, $this->user, $this->pass, $options);
 		
-		$this->trigger();
+		$this->trigger('mysql-connect');
 		
 		return $this;
 	}

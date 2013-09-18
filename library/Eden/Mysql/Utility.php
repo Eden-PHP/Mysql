@@ -72,7 +72,7 @@ class Utility extends SqlQuery
 	public function showColumns($table, $where = null) 
 	{
 		//Argument 1 must be a string, 2 must be string null
-		Argument::i()->test(1, 'string')->argument(2, 'string', 'null');
+		Argument::i()->test(1, 'string')->test(2, 'string', 'null');
 		
 		$where = $where ? ' WHERE '.$where : null;
 		$this->query = 'SHOW FULL COLUMNS FROM `' . $table .'`' . $where;

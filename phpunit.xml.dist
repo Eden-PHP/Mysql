@@ -12,14 +12,14 @@
          bootstrap="test/bootstrap.php"
 >
   <testsuites>
-    <testsuite name="Eden SQL Test Suite">
-      <directory>./test/Eden/Tests/Sql</directory>
+    <testsuite name="Eden MySQL Test Suite">
+      <directory>./test/Eden/Tests/Mysql</directory>
     </testsuite>
   </testsuites>
 
   <filter>
     <whitelist>
-      <directory suffix=".php">./library/Eden/Sql/</directory>
+      <directory suffix=".php">./library/Eden/Mysql/</directory>
     </whitelist>
   </filter>
 </phpunit>

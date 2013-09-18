@@ -19,10 +19,16 @@ use Eden\Sql\Select as SqlSelect;
  * @package Mysql
  * @author Christian Blanquera cblanquera@openovate.com
  */
-class Eden_Mysql_Subselect extends CoreBase 
+class Subselect extends CoreBase 
 {
 	protected $parentQuery;
 	
+	/**
+	 * Construct: Set Parent Query and Column
+	 *
+	 * @param SqlSelect
+	 * @param string
+	 */
 	public function __construct(SqlSelect $parentQuery, $select = '*') 
 	{
 		//Argument 2 must be a string
