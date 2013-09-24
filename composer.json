@@ -1,7 +1,7 @@
 {
     "name": "eden-php/mysql",
     "type": "library",
-    "description": "Eden MySQL ORM Component",
+    "description": "Eden MySQL Search, Collection, Model ORM component",
     "keywords": ["eden", "library"],
     "homepage": "http://eden-php.com",
     "license": "MIT",
