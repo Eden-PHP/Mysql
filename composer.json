@@ -1,5 +1,5 @@
 {
-    "name": "eden-php/mysql",
+    "name": "eden/mysql",
     "type": "library",
     "description": "Eden MySQL Search, Collection, Model ORM component",
     "keywords": ["eden", "library"],
