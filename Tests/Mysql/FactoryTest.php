@@ -7,7 +7,7 @@
  * distributed with this package.
  */
  
-class Eden_Tests_Mysql_FactoryTest extends \PHPUnit_Framework_TestCase
+class Eden_Mysql_Tests_Mysql_FactoryTest extends \PHPUnit_Framework_TestCase
 {
 	public static $database;
 	

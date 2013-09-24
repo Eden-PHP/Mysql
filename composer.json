@@ -1,7 +1,7 @@
 {
     "name": "eden-php/mysql",
     "type": "library",
-    "description": "SQL core methods for MySQL, Posgres and SQLite",
+    "description": "Eden MySQL ORM Component",
     "keywords": ["eden", "library"],
     "homepage": "http://eden-php.com",
     "license": "MIT",
@@ -13,9 +13,13 @@
     ],
     "require": {
         "php": ">=5.3.1",
-		"eden-php/sql": ">=1.0.0"
+		"eden-php/core": "1.*",
+		"eden-php/type": "1.*",
+		"eden-php/collection": "1.*",
+		"eden-php/model": "1.*",
+		"eden-php/sql": "1.*"
     },
     "autoload": {
-         "psr-0": { "Eden\\": "library/" }
+         "psr-0": { "Eden\\Mysql\\": "" }
     }
 }
