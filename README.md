@@ -263,7 +263,7 @@ A common example is when you have an array table that comprises of joined data. 
 <a name="together"></a>
 ## Putting it all together
 
-So a common scenario would be retrieving data, manipulating the results and sending back to the database. Let's see with Eden's search, collection and model objects how we can acheive this.
+So a common scenario would be retrieving data, manipulating the results and sending back to the database. Let's see with *Eden's* search, collection and model objects how we can acheive this.
 
 **Figure 15. The Coolest Thing Ever!**
 
