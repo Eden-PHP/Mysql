@@ -297,5 +297,23 @@ class Factory extends SqlFactory
 		
 		return implode("\n\n", $backup);
 	}
+
+	/**
+	 * Wraps the table name in back quotes before calling the overridden 
+	 * insert method in Eden\Sql\Factory which returns the insert query 
+	 * builder.
+	 *
+	 * @param string|null
+	 * @return Eden\Sql\Insert
+	 *
+	 */
+	public function insert($table = null) 
+	{
+		//Argument 1 must be a string or null
+		Argument::i()->test(1, 'string', 'null');
+		
+		return parent::insert('`'.$table.'`');
+	}
+
 }
 
