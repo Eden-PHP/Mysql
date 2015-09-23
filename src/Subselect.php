@@ -9,17 +9,14 @@
 
 namespace Eden\Mysql;
 
-use Eden\Core\Base as CoreBase;
-use Eden\Sql\Select as SqlSelect;
-
 /**
  * Generates subselect query string syntax
  *
  * @vendor Eden
- * @package Mysql
+ * @package mysql
  * @author Christian Blanquera cblanquera@openovate.com
  */
-class Subselect extends CoreBase 
+class Subselect extends Base
 {
 	protected $parentQuery;
 	
@@ -29,7 +26,7 @@ class Subselect extends CoreBase
 	 * @param SqlSelect
 	 * @param string
 	 */
-	public function __construct(SqlSelect $parentQuery, $select = '*') 
+	public function __construct(\Eden\Sql\Select $parentQuery, $select = '*') 
 	{
 		//Argument 2 must be a string
 		Argument::i()->test(2, 'string');
@@ -56,7 +53,7 @@ class Subselect extends CoreBase
 	 * @param object usually the parent query object
 	 * @return this
 	 */
-	public function setParentQuery(SqlSelect $parentQuery) 
+	public function setParentQuery(\Eden\Sql\Select $parentQuery) 
 	{
 		$this->parentQuery = $parentQuery;
 		return $this;

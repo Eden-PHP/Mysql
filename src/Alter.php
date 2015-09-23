@@ -9,16 +9,14 @@
 
 namespace Eden\Mysql;
 
-use Eden\Sql\Query as SqlQuery;
-
 /**
  * Generates alter query string syntax
  *
  * @vendor Eden
- * @package Mysql
+ * @package mysql
  * @author Christian Blanquera cblanquera@openovate.com
  */
-class Alter extends SqlQuery 
+class Alter extends \Eden\Sql\Query 
 {
 	protected $name = null;
 	protected $changeFields = array();

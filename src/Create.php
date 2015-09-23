@@ -9,16 +9,14 @@
 
 namespace Eden\Mysql;
 
-use Eden\Sql\Query as SqlQuery;
-
 /**
  * Generates create table query string syntax
  *
  * @vendor Eden
- * @package Mysql
+ * @package mysql
  * @author Christian Blanquera cblanquera@openovate.com
  */
-class Create extends SqlQuery 
+class Create extends \Eden\Sql\Query 
 {
 	protected $name	= null;
 	protected $comments = null;

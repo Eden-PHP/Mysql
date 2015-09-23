@@ -9,16 +9,14 @@
 
 namespace Eden\Mysql;
 
-use Eden\Sql\Query as SqlQuery;
-
 /**
  * Generates utility query strings
  *
  * @vendor Eden
- * @package Mysql
+ * @package mysql
  * @author Christian Blanquera cblanquera@openovate.com
  */
-class Utility extends SqlQuery
+class Utility extends \Eden\Sql\Query
 {
 	protected $_query = NULL;
 	

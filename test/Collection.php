@@ -7,7 +7,7 @@
  * distributed with this package.
  */
  
-class Eden_Mysql_Tests_Mysql_CollectionTest extends \PHPUnit_Framework_TestCase
+class Eden_Mysql_Test_Collection extends PHPUnit_Framework_TestCase
 {
 	public static $database;
 	

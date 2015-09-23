@@ -9,8 +9,6 @@
 
 namespace Eden\Mysql;
 
-use Eden\Core\Base as CoreBase;
-
 /**
  * The base class for all classes wishing to integrate with Eden.
  * Extending this class will allow your methods to seemlessly be
@@ -18,9 +16,9 @@ use Eden\Core\Base as CoreBase;
  * loading patterns.
  *
  * @vendor Eden
- * @package Mysql
+ * @package mysql
  * @author Christian Blanquera cblanquera@openovate.com
  */
-class Base extends CoreBase
+class Base extends \Eden\Core\Base
 {
 }

@@ -9,8 +9,6 @@
 
 namespace Eden\Mysql;
 
-use Eden\Sql\Factory as SqlFactory;
-
 /**
  * Abstractly defines a layout of available methods to
  * connect to and query a MySQL database. This class also 
@@ -24,7 +22,7 @@ use Eden\Sql\Factory as SqlFactory;
  * @package Mysql
  * @author Christian Blanquera cblanquera@openovate.com
  */
-class Factory extends SqlFactory 
+class Index extends \Eden\Sql\Index 
 {
 	protected $host = 'localhost';
 	protected $name = null;
@@ -92,7 +90,7 @@ class Factory extends SqlFactory
 	 * Connects to the database
 	 * 
 	 * @param array the connection options
-	 * @return Eden\Mysql\Factory
+	 * @return 
 	 */
 	public function connect(array $options = array()) 
 	{
