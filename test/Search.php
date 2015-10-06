@@ -13,7 +13,7 @@ class Eden_Mysql_Tests_Mysql_SearchTest extends \PHPUnit_Framework_TestCase
 	
 	public function setUp() {
 		date_default_timezone_set('GMT');
-		self::$database = eden('mysql', '127.0.0.1', 'eden', 'root', '');
+		self::$database = eden('mysql', '127.0.0.1', 'eden', 'travis', '');
 		
 		//Schema
 		self::$database->query(
@@ -96,7 +96,7 @@ class Eden_Mysql_Tests_Mysql_SearchTest extends \PHPUnit_Framework_TestCase
 	
 	
 	public function testTearDown() {
-		eden('mysql', '127.0.0.1', 'eden', 'root', '')
+		eden('mysql', '127.0.0.1', 'eden', 'travis', '')
 		->query("DROP TABLE IF EXISTS `unit_post`");
 	}
 }
