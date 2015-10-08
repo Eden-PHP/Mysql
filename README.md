@@ -1,3 +1,5 @@
+[![Build Status](https://api.travis-ci.org/Eden-PHP/Mysql.png)](https://travis-ci.org/Eden-PHP/Mysql)
+====
 # Mysql
 
 - [Basic Querying](#basic)
