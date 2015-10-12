@@ -18,9 +18,10 @@ namespace Eden\Mysql;
  * all SQL classes, comes coupled with loosely defined
  * searching, collections and models.
  *
- * @vendor Eden
- * @package Mysql
- * @author Christian Blanquera cblanquera@openovate.com
+ * @vendor   Eden
+ * @package  Mysql
+ * @author   Christian Blanquera <cblanquera@openovate.com>
+ * @standard PSR-2
  */
 class Index extends \Eden\Sql\Index
 {
@@ -90,6 +91,7 @@ class Index extends \Eden\Sql\Index
      * Connects to the database
      *
      * @param array the connection options
+     *
      * @return
      */
     public function connect(array $options = array())
@@ -139,6 +141,7 @@ class Index extends \Eden\Sql\Index
      * Returns the columns and attributes given the table name
      *
      * @param the name of the table
+     *
      * @return attay|false
      */
     public function getColumns($table, $filters = null)
@@ -165,6 +168,7 @@ class Index extends \Eden\Sql\Index
      * Peturns the primary key name given the table
      *
      * @param string table
+     *
      * @return string
      */
     public function getPrimaryKey($table)
@@ -198,6 +202,7 @@ class Index extends \Eden\Sql\Index
      * Returns a listing of tables in the DB
      *
      * @param the like pattern
+     *
      * @return attay|false
      */
     public function getTables($like = null)

@@ -12,9 +12,10 @@ namespace Eden\Mysql;
 /**
  * Generates subselect query string syntax
  *
- * @vendor Eden
- * @package mysql
- * @author Christian Blanquera cblanquera@openovate.com
+ * @vendor   Eden
+ * @package  mysql
+ * @author   Christian Blanquera <cblanquera@openovate.com>
+ * @standard PSR-2
  */
 class Subselect extends Base
 {
@@ -39,6 +40,7 @@ class Subselect extends Base
      * Returns the string version of the query
      *
      * @param  bool
+     *
      * @return string
      * @notes returns the query based on the registry
      */
@@ -51,6 +53,7 @@ class Subselect extends Base
      * Sets the parent Query
      *
      * @param object usually the parent query object
+     *
      * @return this
      */
     public function setParentQuery(\Eden\Sql\Select $parentQuery)
