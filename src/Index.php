@@ -1,9 +1,9 @@
 <?php //-->
-/*
- * This file is part of the Mysql package of the Eden PHP Library.
- * (c) 2013-2014 Openovate Labs
+/**
+ * This file is part of the Eden PHP Library.
+ * (c) 2014-2016 Openovate Labs
  *
- * Copyright and license information can be found at LICENSE
+ * Copyright and license information can be found at LICENSE.txt
  * distributed with this package.
  */
 
@@ -25,19 +25,34 @@ namespace Eden\Mysql;
  */
 class Index extends \Eden\Sql\Index
 {
+    /**
+     * @var string $host Database host
+     */
     protected $host = 'localhost';
+
+    /**
+     * @var string|null $name Database name
+     */
     protected $name = null;
+
+    /**
+     * @var string|null $user Database user name
+     */
     protected $user = null;
+
+    /**
+     * @var string|null $pass Database password
+     */
     protected $pass = null;
     
     /**
      * Construct: Store connection information
      *
-     * @param string|null
-     * @param string
-     * @param string
-     * @param string|null
-     * @param number|null
+     * @param *string      $host Database host
+     * @param *string|null $name Database name
+     * @param *string|null $user Database user name
+     * @param string|null  $pass Database password
+     * @param number|null  $port Database port
      */
     public function __construct($host, $name, $user, $pass = null, $port = null)
     {
@@ -64,6 +79,8 @@ class Index extends \Eden\Sql\Index
     /**
      * Returns the alter query builder
      *
+     * @param *string $name Name of table
+     *
      * @return Eden\Mysql\Alter
      */
     public function alter($name = null)
@@ -76,6 +93,8 @@ class Index extends \Eden\Sql\Index
     
     /**
      * Returns the create query builder
+     *
+     * @param *string $name Name of table
      *
      * @return Eden\Mysql\Create
      */
@@ -90,7 +109,7 @@ class Index extends \Eden\Sql\Index
     /**
      * Connects to the database
      *
-     * @param array the connection options
+     * @param array $options the connection options
      *
      * @return
      */
@@ -117,6 +136,9 @@ class Index extends \Eden\Sql\Index
     /**
      * Returns the Subselect query builder
      *
+     * @param string $parentQuery The parent query
+     * @param string $select      List of columns
+     *
      * @return Eden\Mysql\Subselect
      */
     public function subselect($parentQuery, $select = '*')
@@ -140,9 +162,10 @@ class Index extends \Eden\Sql\Index
     /**
      * Returns the columns and attributes given the table name
      *
-     * @param the name of the table
+     * @param string $table   The name of the table
+     * @param array  $filters Where filters
      *
-     * @return attay|false
+     * @return array|false
      */
     public function getColumns($table, $filters = null)
     {
@@ -167,7 +190,7 @@ class Index extends \Eden\Sql\Index
     /**
      * Peturns the primary key name given the table
      *
-     * @param string table
+     * @param string $table Table name
      *
      * @return string
      */
@@ -201,7 +224,7 @@ class Index extends \Eden\Sql\Index
     /**
      * Returns a listing of tables in the DB
      *
-     * @param the like pattern
+     * @param string|null $like The like pattern
      *
      * @return attay|false
      */
@@ -227,6 +250,8 @@ class Index extends \Eden\Sql\Index
     /**
      * Returns the whole enitre schema and rows
      * of the current table
+     *
+     * @param *string $table Name of table
      *
      * @return string
      */

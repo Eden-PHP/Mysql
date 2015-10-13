@@ -1,9 +1,9 @@
 <?php //-->
-/*
- * This file is part of the Mysql package of the Eden PHP Library.
- * (c) 2013-2014 Openovate Labs
+/**
+ * This file is part of the Eden PHP Library.
+ * (c) 2014-2016 Openovate Labs
  *
- * Copyright and license information can be found at LICENSE
+ * Copyright and license information can be found at LICENSE.txt
  * distributed with this package.
  */
 
@@ -13,23 +13,46 @@ namespace Eden\Mysql;
  * Generates create table query string syntax
  *
  * @vendor   Eden
- * @package  mysql
+ * @package  Mysql
  * @author   Christian Blanquera <cblanquera@openovate.com>
  * @standard PSR-2
  */
 class Create extends \Eden\Sql\Query
 {
-    protected $name     = null;
+    /**
+     * @var string|null $name Name of table
+     */
+    protected $name = null;
+
+    /**
+     * @var string|null $comments Table comments
+     */
     protected $comments = null;
+
+    /**
+     * @var array $fields List of fields
+     */
     protected $fields = array();
+
+    /**
+     * @var array $keys List of key indexes
+     */
     protected $keys = array();
+
+    /**
+     * @var array $uniqueKeys List of unique keys
+     */
     protected $uniqueKeys = array();
+
+    /**
+     * @var array $primaryKeys List of primary keys
+     */
     protected $primaryKeys = array();
     
     /**
      * Construct: Set the table, if any
      *
-     * @param string|null
+     * @param string|null $name Name of table
      */
     public function __construct($name = null)
     {
@@ -41,10 +64,10 @@ class Create extends \Eden\Sql\Query
     /**
      * Adds a field in the table
      *
-     * @param string name
-     * @param array attributes
+     * @param *string $name       Column name
+     * @param *array  $attributes Column attributes
      *
-     * @return this
+     * @return Eden\Mysql\Create
      */
     public function addField($name, array $attributes)
     {
@@ -58,10 +81,10 @@ class Create extends \Eden\Sql\Query
     /**
      * Adds an index key
      *
-     * @param string name
-     * @param array fields
+     * @param *string $name   Name of key
+     * @param *array  $fields List of key fields
      *
-     * @return this
+     * @return Eden\Mysql\Create
      */
     public function addKey($name, array $fields)
     {
@@ -75,9 +98,9 @@ class Create extends \Eden\Sql\Query
     /**
      * Adds a primary key
      *
-     * @param string name
+     * @param *string $name Name of key
      *
-     * @return this
+     * @return Eden\Mysql\Create
      */
     public function addPrimaryKey($name)
     {
@@ -91,10 +114,10 @@ class Create extends \Eden\Sql\Query
     /**
      * Adds a unique key
      *
-     * @param string name
-     * @param array fields
+     * @param *string $name   Name of key
+     * @param *array  $fields List of key fields
      *
-     * @return this
+     * @return Eden\Mysql\Create
      */
     public function addUniqueKey($name, array $fields)
     {
@@ -108,10 +131,9 @@ class Create extends \Eden\Sql\Query
     /**
      * Returns the string version of the query
      *
-     * @param  bool
+     * @param bool $unbind Whether to unbind variables
      *
      * @return string
-     * @notes returns the query based on the registry
      */
     public function getQuery($unbind = false)
     {
@@ -188,9 +210,9 @@ class Create extends \Eden\Sql\Query
     /**
      * Sets comments
      *
-     * @param string comments
+     * @param *string $comments Table comments
      *
-     * @return this
+     * @return Eden\Mysql\Create
      */
     public function setComments($comments)
     {
@@ -204,9 +226,9 @@ class Create extends \Eden\Sql\Query
     /**
      * Sets a list of fields to the table
      *
-     * @param array fields
+     * @param *array $fields List of fields
      *
-     * @return this
+     * @return Eden\Mysql\Create
      */
     public function setFields(array $fields)
     {
@@ -217,9 +239,9 @@ class Create extends \Eden\Sql\Query
     /**
      * Sets a list of keys to the table
      *
-     * @param array keys
+     * @param *array $keys List of keys
      *
-     * @return this
+     * @return Eden\Mysql\Create
      */
     public function setKeys(array $keys)
     {
@@ -230,9 +252,9 @@ class Create extends \Eden\Sql\Query
     /**
      * Sets the name of the table you wish to create
      *
-     * @param string name
+     * @param *string $name Table name
      *
-     * @return this
+     * @return Eden\Mysql\Create
      */
     public function setName($name)
     {
@@ -246,9 +268,9 @@ class Create extends \Eden\Sql\Query
     /**
      * Sets a list of primary keys to the table
      *
-     * @param array primaryKeys
+     * @param *array $primaryKeys List of primary keys
      *
-     * @return this
+     * @return Eden\Mysql\Create
      */
     public function setPrimaryKeys(array $primaryKeys)
     {
@@ -259,9 +281,9 @@ class Create extends \Eden\Sql\Query
     /**
      * Sets a list of unique keys to the table
      *
-     * @param array uniqueKeys
+     * @param *array $uniqueKeys List of unique keys
      *
-     * @return this
+     * @return Eden\Mysql\Create
      */
     public function setUniqueKeys(array $uniqueKeys)
     {

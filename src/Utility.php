@@ -1,9 +1,9 @@
 <?php //-->
-/*
- * This file is part of the Mysql package of the Eden PHP Library.
- * (c) 2013-2014 Openovate Labs
+/**
+ * This file is part of the Eden PHP Library.
+ * (c) 2014-2016 Openovate Labs
  *
- * Copyright and license information can be found at LICENSE
+ * Copyright and license information can be found at LICENSE.txt
  * distributed with this package.
  */
 
@@ -13,20 +13,23 @@ namespace Eden\Mysql;
  * Generates utility query strings
  *
  * @vendor   Eden
- * @package  mysql
+ * @package  Mysql
  * @author   Christian Blanquera <cblanquera@openovate.com>
  * @standard PSR-2
  */
 class Utility extends \Eden\Sql\Query
 {
-    protected $_query = null;
+    /**
+     * @var string|null $query The query string
+     */
+    protected $query = null;
     
     /**
      * Query for dropping a table
      *
-     * @param string the name of the table
+     * @param *string $table The name of the table
      *
-     * @return this
+     * @return Eden\Mysql\Utility
      */
     public function dropTable($table)
     {
@@ -50,10 +53,10 @@ class Utility extends \Eden\Sql\Query
     /**
      * Query for renaming a table
      *
-     * @param string the name of the table
-     * @param string the new name of the table
+     * @param *string $table The name of the table
+     * @param *string $name  The new name of the table
      *
-     * @return this
+     * @return Eden\Mysql\Utility
      */
     public function renameTable($table, $name)
     {
@@ -67,9 +70,10 @@ class Utility extends \Eden\Sql\Query
     /**
      * Query for showing all columns of a table
      *
-     * @param string the name of the table
+     * @param *string      $table The name of the table
+     * @param *string|null $where Filter/s
      *
-     * @return this
+     * @return Eden\Mysql\Utility
      */
     public function showColumns($table, $where = null)
     {
@@ -84,9 +88,9 @@ class Utility extends \Eden\Sql\Query
     /**
      * Query for showing all tables
      *
-     * @param string like
+     * @param string|null $like The like pattern
      *
-     * @return this
+     * @return Eden\Mysql\Utility
      */
     public function showTables($like = null)
     {
@@ -100,9 +104,9 @@ class Utility extends \Eden\Sql\Query
     /**
      * Query for truncating a table
      *
-     * @param string the name of the table
+     * @param *string $table The name of the table
      *
-     * @return this
+     * @return Eden\Mysql\Utility
      */
     public function truncate($table)
     {
