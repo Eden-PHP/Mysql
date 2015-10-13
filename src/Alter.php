@@ -1,9 +1,9 @@
 <?php //-->
-/*
- * This file is part of the Mysql package of the Eden PHP Library.
- * (c) 2013-2014 Openovate Labs
+/**
+ * This file is part of the Eden PHP Library.
+ * (c) 2014-2016 Openovate Labs
  *
- * Copyright and license information can be found at LICENSE
+ * Copyright and license information can be found at LICENSE.txt
  * distributed with this package.
  */
 
@@ -12,27 +12,67 @@ namespace Eden\Mysql;
 /**
  * Generates alter query string syntax
  *
- * @vendor Eden
- * @package mysql
- * @author Christian Blanquera cblanquera@openovate.com
+ * @vendor   Eden
+ * @package  Mysql
+ * @author   Christian Blanquera <cblanquera@openovate.com>
+ * @standard PSR-2
  */
 class Alter extends \Eden\Sql\Query
 {
+    /**
+     * @var string|null $name Name of table
+     */
     protected $name = null;
+
+    /**
+     * @var array $changeFields List of fields to change
+     */
     protected $changeFields = array();
+
+    /**
+     * @var array $addFields List of fields to add
+     */
     protected $addFields = array();
+
+    /**
+     * @var array $removeFields List of fields to remove
+     */
     protected $removeFields = array();
+
+    /**
+     * @var array $addKeys List of keys to add
+     */
     protected $addKeys = array();
+
+    /**
+     * @var array $removeKeys List of keys to remove
+     */
     protected $removeKeys = array();
+
+    /**
+     * @var array $addUniqueKeys List of unique keys to add
+     */
     protected $addUniqueKeys = array();
+
+    /**
+     * @var array $removeUniqueKeys List of unique keys to remove
+     */
     protected $removeUniqueKeys = array();
+
+    /**
+     * @var array $addPrimaryKeys List of primary keys to add
+     */
     protected $addPrimaryKeys = array();
+
+    /**
+     * @var array $removePrimaryKeys List of primary keys to remove
+     */
     protected $removePrimaryKeys = array();
     
     /**
      * Construct: Set the table, if any
      *
-     * @param string|null
+     * @param string|null $name Table name
      */
     public function __construct($name = null)
     {
@@ -44,9 +84,10 @@ class Alter extends \Eden\Sql\Query
     /**
      * Adds a field in the table
      *
-     * @param string name
-     * @param array attributes
-     * @return this
+     * @param *string $name       Column name
+     * @param *array  $attributes Column attributes
+     *
+     * @return Eden\Mysql\Alter
      */
     public function addField($name, array $attributes)
     {
@@ -60,8 +101,9 @@ class Alter extends \Eden\Sql\Query
     /**
      * Adds an index key
      *
-     * @param string name
-     * @return this
+     * @param *string $name Name of key
+     *
+     * @return Eden\Mysql\Alter
      */
     public function addKey($name)
     {
@@ -75,8 +117,9 @@ class Alter extends \Eden\Sql\Query
     /**
      * Adds a primary key
      *
-     * @param string name
-     * @return this
+     * @param *string $name Name of key
+     *
+     * @return Eden\Mysql\Alter
      */
     public function addPrimaryKey($name)
     {
@@ -90,8 +133,9 @@ class Alter extends \Eden\Sql\Query
     /**
      * Adds a unique key
      *
-     * @param string name
-     * @return this
+     * @param *string $name Name of key
+     *
+     * @return Eden\Mysql\Alter
      */
     public function addUniqueKey($name)
     {
@@ -106,9 +150,10 @@ class Alter extends \Eden\Sql\Query
      * Changes attributes of the table given
      * the field name
      *
-     * @param string name
-     * @param array attributes
-     * @return this
+     * @param *string $name       Column name
+     * @param *array  $attributes Column attributes
+     *
+     * @return Eden\Mysql\Alter
      */
     public function changeField($name, array $attributes)
     {
@@ -122,9 +167,9 @@ class Alter extends \Eden\Sql\Query
     /**
      * Returns the string version of the query
      *
-     * @param  bool
+     * @param bool $unbind Whether to unbind variables
+     *
      * @return string
-     * @notes returns the query based on the registry
      */
     public function getQuery($unbind = false)
     {
@@ -248,8 +293,9 @@ class Alter extends \Eden\Sql\Query
     /**
      * Removes a field
      *
-     * @param string name
-     * @return this
+     * @param *string $name Column name
+     *
+     * @return Eden\Mysql\Alter
      */
     public function removeField($name)
     {
@@ -263,8 +309,9 @@ class Alter extends \Eden\Sql\Query
     /**
      * Removes an index key
      *
-     * @param string name
-     * @return this
+     * @param *string $name Name of key
+     *
+     * @return Eden\Mysql\Alter
      */
     public function removeKey($name)
     {
@@ -278,8 +325,9 @@ class Alter extends \Eden\Sql\Query
     /**
      * Removes a primary key
      *
-     * @param string name
-     * @return this
+     * @param *string $name Name of key
+     *
+     * @return Eden\Mysql\Alter
      */
     public function removePrimaryKey($name)
     {
@@ -293,8 +341,9 @@ class Alter extends \Eden\Sql\Query
     /**
      * Removes a unique key
      *
-     * @param string name
-     * @return this
+     * @param *string $name Name of key
+     *
+     * @return Eden\Mysql\Alter
      */
     public function removeUniqueKey($name)
     {
@@ -308,8 +357,9 @@ class Alter extends \Eden\Sql\Query
     /**
      * Sets the name of the table you wish to create
      *
-     * @param string name
-     * @return this
+     * @param *string $name Table name
+     *
+     * @return Eden\Mysql\Alter
      */
     public function setName($name)
     {

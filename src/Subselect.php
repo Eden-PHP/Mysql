@@ -1,9 +1,9 @@
 <?php //-->
-/*
- * This file is part of the Mysql package of the Eden PHP Library.
- * (c) 2013-2014 Openovate Labs
+/**
+ * This file is part of the Eden PHP Library.
+ * (c) 2014-2016 Openovate Labs
  *
- * Copyright and license information can be found at LICENSE
+ * Copyright and license information can be found at LICENSE.txt
  * distributed with this package.
  */
 
@@ -12,9 +12,10 @@ namespace Eden\Mysql;
 /**
  * Generates subselect query string syntax
  *
- * @vendor Eden
- * @package mysql
- * @author Christian Blanquera cblanquera@openovate.com
+ * @vendor   Eden
+ * @package  Mysql
+ * @author   Christian Blanquera <cblanquera@openovate.com>
+ * @standard PSR-2
  */
 class Subselect extends Base
 {
@@ -23,8 +24,8 @@ class Subselect extends Base
     /**
      * Construct: Set Parent Query and Column
      *
-     * @param SqlSelect
-     * @param string
+     * @param SqlSelect $parentQuery Main select query
+     * @param string    $select      List of columns
      */
     public function __construct(\Eden\Sql\Select $parentQuery, $select = '*')
     {
@@ -38,9 +39,7 @@ class Subselect extends Base
     /**
      * Returns the string version of the query
      *
-     * @param  bool
      * @return string
-     * @notes returns the query based on the registry
      */
     public function getQuery()
     {
@@ -50,8 +49,9 @@ class Subselect extends Base
     /**
      * Sets the parent Query
      *
-     * @param object usually the parent query object
-     * @return this
+     * @param $parentQuery Main select query
+     *
+     * @return Eden\Mysql\Subselect
      */
     public function setParentQuery(\Eden\Sql\Select $parentQuery)
     {
