@@ -26,19 +26,19 @@
 
 The following documentation uses `eden()` in its example reference. Enabling this function requires an extra step as descirbed in this section which is not required if you access this package using the following.
 
-```
+```php
 Eden\Mysql\Index::i();
 ```
 
 When using composer, there is not an easy way to access functions from packages. As a workaround, adding this constant in your code will allow `eden()` to be available after. 
 
-```
+```php
 Eden::DECORATOR;
 ```
 
 For example:
 
-```
+```php
 Eden::DECORATOR;
 
 eden()->inspect('Hello World');
@@ -53,7 +53,7 @@ eden()->inspect('Hello World');
 
 **Figure 1. Database Connection Information**
 
-```
+```php
 $database = eden('mysql', '[HOST]' ,'[DBNAME]', '[USER]', '[PASS]');    //instantiate
 ```
 
@@ -70,7 +70,7 @@ On a very low level can call raw queries as in Figure 2.
 
 **Figure 2. Raw Query**
 
-```
+```php
 $database->query('SELECT * FROM user');  // returns results of raw queries
 ```
 
@@ -78,7 +78,7 @@ $database->query('SELECT * FROM user');  // returns results of raw queries
 
 **Figure 3. Raw Binding**
 
-```
+```php
 $query  = 'SELECT * FROM user WHERE user_name LIKE :user_name AND user_active = :user_active';
 $bind   = array(':user_name' => '%'.$userName.'%', ':user_active' => 1);
 
@@ -98,7 +98,7 @@ If you prefer the ORM way to save data Figure 4 provides several method examples
 
 Figure 4. Data Manilpulation
 
-```
+```php
 $settings = array(
 	'user_name'     => 'Chris'
 	'user_email'    => 'myemail@mail.com');
@@ -120,7 +120,7 @@ Inserting data is pretty trivial. We included 2 ways to insert data. Like getRow
 
 **Figure 4. Two ways to insert**
 
-```
+```php
 $settings = array('user_name' => 'Chris', 'user_email' => 'myemail@mail.com');
 $database->insertRow('user', $settings);         // inserts row into 'user' table
  
@@ -141,7 +141,7 @@ Updating is about as easy as inserting. There's only one method you need to know
 
 **Figure 5. Updating**
 
-```
+```php
 $settings = array('user_name' => 'Chris', 'user_email' => 'myemail@mail.com');
 $filter[] = array('user_id=%s', 1);
 $database->updateRows('user', $settings, $filter); // inserts row into 'user' table
@@ -151,7 +151,7 @@ A common scenario is when you need to insert if a column value is not found and 
 
 **Figure 6. Insert or update**
 
-```
+```php
 $settings = array('user_name' => 'Chris2', 'user_email' => 'myemail@mail.com');
 $database->setRow('user', 'user_email', 'myemail@mail.com', $settings);
 ```
@@ -160,7 +160,7 @@ $database->setRow('user', 'user_email', 'myemail@mail.com', $settings);
 
 **Figure 7. Remove**
 
-```
+```php
 $filter[] = array('user_id=%s', 1);
 $database->deleteRows('user', $filter); // delete rows in 'user' table where user_id is 1
 ```
@@ -174,7 +174,7 @@ A better way to build complex queries is with using Eden's search object. An ove
 
 **Figure 8. MySQL Search**
 
-```
+```php
 $database
 	->search('user')
 	->setColumns('*')
@@ -193,7 +193,7 @@ In the figure above there's a few methods being powered with magic, but we'll ju
 
 **Kinds of Join methods**
 
-```
+```php
 innerJoinOn()
 innerJoinUsing()
 leftJoinOn()
@@ -216,7 +216,7 @@ There are three kinds of pagination methods also available
 
 **Pagination Methods**
 
-```
+```php
 setRange(75)
 setStart(25)
 setPage(1)
@@ -226,7 +226,7 @@ It's important if you are going to use `setPage(1)` to call `setRange(75)` first
 
 **Figure 9. Other Useful methods**
 
-```
+```php
 ->setTable('user')
 ->setGroup('user_active')
 ```
@@ -237,7 +237,7 @@ When your happy with your query you can retrieve the results in 3 ways as descri
 
 **Figure 10. Retrieving Results**
 
-```
+```php
 ->getTotal()
 ->getRows()
 ->getCollection()
@@ -254,7 +254,7 @@ Collections do exactly the same thing as models except it manipulates multiple m
 
 **Figure 11. MySQL Collections**
 
-```
+```php
 //set user name for all rows
 $collection->setUserName('Chris');
 
@@ -281,7 +281,7 @@ Some other utility methods not covered by th above examples are date formating a
 
 **Figure 12. Utility methods**
 
-```
+```php
 //formats a date column
 $collection->formatTime('post_created', 'F d, y g:ia'); 
 
@@ -310,7 +310,7 @@ In *Eden*, we managed to loosely define models which takes off the restrictivene
 
 **Figure 13. Database Model (Extends Array)**
 
-```
+```php
 $model->setUserName('Chris');            //set user name
 $model->getUserEmail();                  // returns user email
  
@@ -332,7 +332,7 @@ A common example is when you have an array table that comprises of joined data. 
 
 **Figure 14. Two tables**
 
-```
+```php
 $row = array(
 	'user_id'       => 1,
 	'user_name'     => 'Chris',
@@ -355,7 +355,7 @@ So a common scenario would be retrieving data, manipulating the results and send
 
 **Figure 15. The Coolest Thing Ever!**
 
-```
+```php
 //load database
 eden('mysql', MYSQL_HOST, MYSQL_NAME, MYSQL_USER, MYSQL_PASS)
 	//search user table
