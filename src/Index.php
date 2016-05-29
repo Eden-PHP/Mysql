@@ -44,17 +44,23 @@ class Index extends \Eden\Sql\Index
      * @var string|null $pass Database password
      */
     protected $pass = null;
-    
+
+    /**
+     * @var string|null $socket Socket connection
+     */
+    protected $socket = null;
+
     /**
      * Construct: Store connection information
      *
-     * @param *string      $host Database host
-     * @param *string|null $name Database name
-     * @param *string|null $user Database user name
-     * @param string|null  $pass Database password
-     * @param number|null  $port Database port
+     * @param *string      $host   Database host
+     * @param *string|null $name   Database name
+     * @param *string|null $user   Database user name
+     * @param string|null  $pass   Database password
+     * @param number|null  $port   Database port
+     * @param string|null  $socket Database socket
      */
-    public function __construct($host, $name, $user, $pass = null, $port = null)
+    public function __construct($host, $name, $user, $pass = null, $port = null, $socket = null)
     {
         //argument test
         Argument::i()
@@ -68,14 +74,17 @@ class Index extends \Eden\Sql\Index
             ->test(4, 'string', 'null')
             //Argument 5 must be a number or null
             ->test(5, 'numeric', 'null');
-        
+            //Argument 6 must be a string or null
+            ->test(6, 'string', 'null');
+
         $this->host = $host;
         $this->name = $name;
         $this->user = $user;
         $this->pass = $pass;
         $this->port = $port;
+        $this->socket = $socket;
     }
-    
+
     /**
      * Returns the alter query builder
      *
@@ -87,10 +96,10 @@ class Index extends \Eden\Sql\Index
     {
         //Argument 1 must be a string or null
         Argument::i()->test(1, 'string', 'null');
-        
+
         return Alter::i($name);
     }
-    
+
     /**
      * Returns the create query builder
      *
@@ -102,10 +111,10 @@ class Index extends \Eden\Sql\Index
     {
         //Argument 1 must be a string or null
         Argument::i()->test(1, 'string', 'null');
-        
+
         return Create::i($name);
     }
-    
+
     /**
      * Connects to the database
      *
@@ -115,24 +124,26 @@ class Index extends \Eden\Sql\Index
      */
     public function connect(array $options = array())
     {
-        $host = $port = null;
-        
+        $host = null;
+
         if (!is_null($this->host)) {
             $host = 'host='.$this->host.';';
             if (!is_null($this->port)) {
-                $port = 'port='.$this->port.';';
+                $host .= 'port='.$this->port.';';
             }
+        } elseif (!is_null($this->socket)) {
+          $host = $this->socket.';';
         }
-        
-        $connection = 'mysql:'.$host.$port.'dbname='.$this->name;
-        
+
+        $connection = 'mysql:'.$host.'dbname='.$this->name;
+
         $this->connection = new \PDO($connection, $this->user, $this->pass, $options);
-        
+
         $this->trigger('mysql-connect');
-        
+
         return $this;
     }
-    
+
     /**
      * Returns the Subselect query builder
      *
@@ -145,10 +156,10 @@ class Index extends \Eden\Sql\Index
     {
         //Argument 2 must be a string
         Argument::i()->test(2, 'string');
-        
+
         return Subselect::i($parentQuery, $select);
     }
-    
+
     /**
      * Returns the alter query builder
      *
@@ -158,7 +169,7 @@ class Index extends \Eden\Sql\Index
     {
         return Utility::i();
     }
-    
+
     /**
      * Returns the columns and attributes given the table name
      *
@@ -171,9 +182,9 @@ class Index extends \Eden\Sql\Index
     {
         //Argument 1 must be a string
         Argument::i()->test(1, 'string');
-        
+
         $query = $this->utility();
-        
+
         if (is_array($filters)) {
             foreach ($filters as $i => $filter) {
                 //array('post_id=%s AND post_title IN %s', 123, array('asd'));
@@ -182,11 +193,11 @@ class Index extends \Eden\Sql\Index
                 $filters[$i] = vsprintf($format, $filter);
             }
         }
-        
+
         $query->showColumns($table, $filters);
         return $this->query($query, $this->getBinds());
     }
-    
+
     /**
      * Peturns the primary key name given the table
      *
@@ -198,12 +209,12 @@ class Index extends \Eden\Sql\Index
     {
         //Argument 1 must be a string
         Argument::i()->test(1, 'string');
-        
+
         $query = $this->utility();
         $results = $this->getColumns($table, "`Key` = 'PRI'");
         return isset($results[0]['Field']) ? $results[0]['Field'] : null;
     }
-    
+
     /**
      * Returns the whole enitre schema and rows
      * of the current databse
@@ -217,10 +228,10 @@ class Index extends \Eden\Sql\Index
         foreach ($tables as $table) {
             $backup[] = $this->getBackup();
         }
-        
+
         return implode("\n\n", $backup);
     }
-    
+
     /**
      * Returns a listing of tables in the DB
      *
@@ -232,7 +243,7 @@ class Index extends \Eden\Sql\Index
     {
         //Argument 1 must be a string or null
         Argument::i()->test(1, 'string', 'null');
-        
+
         $query = $this->utility();
         $like = $like ? $this->bind($like) : null;
         $results = $this->query($query->showTables($like), $q->getBinds());
@@ -243,10 +254,10 @@ class Index extends \Eden\Sql\Index
                 break;
             }
         }
-        
+
         return $newResults;
     }
-    
+
     /**
      * Returns the whole enitre schema and rows
      * of the current table
@@ -259,7 +270,7 @@ class Index extends \Eden\Sql\Index
     {
         //Argument 1 must be a string
         Argument::i()->test(1, 'string');
-        
+
         $backup = array();
         //get the schema
         $schema = $this->getColumns($table);
@@ -270,15 +281,15 @@ class Index extends \Eden\Sql\Index
                 //first try to parse what we can from each field
                 $fieldTypeArray = explode(' ', $field['Type']);
                 $typeArray = explode('(', $fieldTypeArray[0]);
-                
+
                 $type = $typeArray[0];
                 $length = str_replace(')', '', $typeArray[1]);
                 $attribute = isset($fieldTypeArray[1]) ? $fieldTypeArray[1] : null;
-                
+
                 $null = strtolower($field['Null']) == 'no' ? false : true;
-                
+
                 $increment = strtolower($field['Extra']) == 'auto_increment' ? true : false;
-                
+
                 //lets now add a field to our schema class
                 $q->addField($field['Field'], array(
                     'type'              => $type,
@@ -287,7 +298,7 @@ class Index extends \Eden\Sql\Index
                     'null'              => $null,
                     'default'           => $field['Default'],
                     'auto_increment'    => $increment));
-                
+
                 //set keys where found
                 switch ($field['Key']) {
                     case 'PRI':
@@ -301,14 +312,14 @@ class Index extends \Eden\Sql\Index
                         break;
                 }
             }
-            
+
             //store the query but dont run it
             $backup[] = $query;
         }
-        
+
         //get the rows
         $rows = $this->query($this->select->from($table)->getQuery());
-        
+
         if (count($rows)) {
             //lets build an insert query
             $query = $this->insert($table);
@@ -317,11 +328,11 @@ class Index extends \Eden\Sql\Index
                     $query->set($key, $this->getBinds($value), $index);
                 }
             }
-            
+
             //store the query but dont run it
             $backup[] = $query->getQuery(true);
         }
-        
+
         return implode("\n\n", $backup);
     }
 }
