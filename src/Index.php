@@ -73,7 +73,7 @@ class Index extends \Eden\Sql\Index
             //Argument 4 must be a string or null
             ->test(4, 'string', 'null')
             //Argument 5 must be a number or null
-            ->test(5, 'numeric', 'null');
+            ->test(5, 'numeric', 'null')
             //Argument 6 must be a string or null
             ->test(6, 'string', 'null');
 
