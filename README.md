@@ -30,7 +30,7 @@ The following documentation uses `eden()` in its example reference. Enabling thi
 Eden\Mysql\Index::i();
 ```
 
-When using composer, there is not an easy way to access functions from packages. As a workaround, adding this constant in your code will allow `eden()` to be available after. 
+When using composer, there is not an easy way to access functions from packages. As a workaround, adding this constant in your code will allow `eden()` to be available after.
 
 ```php
 Eden::DECORATOR;
@@ -54,7 +54,7 @@ eden()->inspect('Hello World');
 **Figure 1. Database Connection Information**
 
 ```php
-$database = eden('mysql', '[HOST]' ,'[DBNAME]', '[USER]', '[PASS]');    //instantiate
+$database = eden('mysql', '[HOST]' ,'[DBNAME]', '[USER]', '[PASS]', '[SOCKET]');    //instantiate
 ```
 
 Simply put, we first instantiate the class giving the host, database name, user name and password in the figure above. There are no other requirements and you can start using methods immediately.
@@ -102,12 +102,12 @@ Figure 4. Data Manilpulation
 $settings = array(
 	'user_name'     => 'Chris'
 	'user_email'    => 'myemail@mail.com');
-	 
+
 $filter[] = array('user_id=%s', 1);     
 
 // inserts row into 'user' table
 $database->insertRow('user', $settings);
-// updates rows in 'user' table where user_id is 
+// updates rows in 'user' table where user_id is
 $database->updateRows('user', $settings, $filter);
 // delete rows in 'user' table where user_id is 1
 $database->deleteRows('user', $filter);
@@ -123,7 +123,7 @@ Inserting data is pretty trivial. We included 2 ways to insert data. Like getRow
 ```php
 $settings = array('user_name' => 'Chris', 'user_email' => 'myemail@mail.com');
 $database->insertRow('user', $settings);         // inserts row into 'user' table
- 
+
 $settings = array();
 $settings[] = array('user_name' => 'Chris', 'user_email' => 'myemail@mail.com');
 $settings[] = array('user_name' => 'Dan', 'user_email' => 'myemail2@mail.com');
@@ -243,7 +243,7 @@ When your happy with your query you can retrieve the results in 3 ways as descri
 ->getCollection()
 ```
 
-`Figure 10` shows three ways to get the results, the first way `getTotal()`, will retrieve the total number and does not consider pagination elements. `getRows()` will simply return a raw array. `getCollection()` will return you an object with the results for further manipulation. 
+`Figure 10` shows three ways to get the results, the first way `getTotal()`, will retrieve the total number and does not consider pagination elements. `getRows()` will simply return a raw array. `getCollection()` will return you an object with the results for further manipulation.
 
 ====
 
@@ -266,12 +266,12 @@ foreach($collection as $model) {
 	echo $model->getUserName().' ';
 	echo $model['user_email'];
 }
- 
+
 //access as array
 echo $collection[0]['user_name'];
 //set as array
-$collection[0]['user_email'] = 'my@email.com'; 
- 
+$collection[0]['user_email'] = 'my@email.com';
+
 $collection->save('user', $database);    //save to 'user' table in database
 										//only relavent columns will be saved
 										//for all rows
@@ -283,7 +283,7 @@ Some other utility methods not covered by th above examples are date formating a
 
 ```php
 //formats a date column
-$collection->formatTime('post_created', 'F d, y g:ia'); 
+$collection->formatTime('post_created', 'F d, y g:ia');
 
 //for each row, copy the value of post_user to the user_id column
 $collection->copy('post_user', 'user_id');
@@ -313,15 +313,15 @@ In *Eden*, we managed to loosely define models which takes off the restrictivene
 ```php
 $model->setUserName('Chris');            //set user name
 $model->getUserEmail();                  // returns user email
- 
+
 //$model->setAnyThing()              // set or get any abstract key
- 
+
 echo $model['user_name'];               //access as array
 $model['user_email'] = 'my@email.com';  //set as array
- 
+
 echo $model->user_name;              //access as object
 $model->user_name = 'my@email.com';      //set as object
- 
+
 $model->save('user', $database); //save to 'user' table in database
 									//only relavent columns will be saved
 ```
@@ -340,7 +340,7 @@ $row = array(
 	'post_user'     => 1,
 	'post_title'    => 'My Post',
 	'post_detail'   => 'This is my new article');
-	 
+
 $db->model($row)->save('user')->save('post');
 ```
 
@@ -397,8 +397,8 @@ Contributions to *Eden* are following the Github work flow. Please read up befor
 ##Setting up your machine with the Eden repository and your fork
 
 1. Fork the repository
-2. Fire up your local terminal create a new branch from the `v4` branch of your 
-fork with a branch name describing what your changes are. 
+2. Fire up your local terminal create a new branch from the `v4` branch of your
+fork with a branch name describing what your changes are.
  Possible branch name types:
     - bugfix
     - feature
